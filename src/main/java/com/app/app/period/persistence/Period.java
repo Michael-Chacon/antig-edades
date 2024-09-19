@@ -1,4 +1,4 @@
-package com.app.app.categoria.persistence;
+package com.app.app.period.persistence;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,20 +11,21 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "category")
+@Table(name = "period")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Category {
+public class Period {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(nullable = false, length = 20)
     @NonNull
     String name;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
+        if (!(o instanceof Period category)) return false;
         return Objects.equals(getId(), category.getId()) && getName().equals(category.getName());
     }
 
@@ -35,7 +36,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "ConservationStatus{" +
+        return "Period{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

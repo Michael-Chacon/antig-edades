@@ -1,4 +1,4 @@
-package com.app.app.categoria.persistence;
+package com.app.app.conservationStatus.persistence;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,9 +11,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "category")
+@Table(name = "conservation_status")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Category {
+public class ConservationStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -24,8 +24,8 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
-        return Objects.equals(getId(), category.getId()) && getName().equals(category.getName());
+        if (!(o instanceof ConservationStatus conservationStatus)) return false;
+        return Objects.equals(getId(), conservationStatus.getId()) && getName().equals(conservationStatus.getName());
     }
 
     @Override

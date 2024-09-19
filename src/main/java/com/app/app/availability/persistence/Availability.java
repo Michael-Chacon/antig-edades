@@ -1,4 +1,4 @@
-package com.app.app.categoria.persistence;
+package com.app.app.availability.persistence;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,21 +11,22 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "category")
+@Table(name = "availability")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Category {
+public class Availability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NonNull
+    @Column(nullable = false, length = 20)
     String name;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
-        return Objects.equals(getId(), category.getId()) && getName().equals(category.getName());
+        if (!(o instanceof Availability availability)) return false;
+        return Objects.equals(getId(), availability.getId()) && getName().equals(availability.getName());
     }
 
     @Override
