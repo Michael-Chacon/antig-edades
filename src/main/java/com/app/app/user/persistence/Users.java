@@ -24,11 +24,11 @@ public class Users {
     @NotNull
     String name;
 
-    @Column(name = "lastaname_one", nullable = false, length = 15)
+    @Column(name = "lastname_one", nullable = false, length = 15)
     @NotNull
     String lastnameOne;
 
-    @Column(name = "lastaname_two", nullable = true, length = 15)
+    @Column(name = "lastname_two", nullable = true, length = 15)
     String lastnameTwo;
 
     @Column(nullable = false, length = 40)

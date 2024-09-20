@@ -30,9 +30,9 @@ public class CountryImpl implements ICountry {
 
     @Override
     public Country update(Long id, Country country) {
-        return repository.findById(id).map(existPeriod -> {
-            existPeriod.setName(country.getName());
-            return repository.save(existPeriod);
+        return repository.findById(id).map(existElement -> {
+            existElement.setName(country.getName());
+            return repository.save(existElement);
         }).orElseThrow(() -> new ResourceNotFoundException(Country.class.getName(), id));
     }
 
