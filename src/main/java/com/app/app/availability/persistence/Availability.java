@@ -16,7 +16,8 @@ import java.util.Objects;
 public class Availability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @Column(name = "code_availability")
+    Long codeAvailability;
 
     @NonNull
     @Column(nullable = false, length = 20)
@@ -26,18 +27,18 @@ public class Availability {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Availability availability)) return false;
-        return Objects.equals(getId(), availability.getId()) && getName().equals(availability.getName());
+        return Objects.equals(getCodeAvailability(), availability.getCodeAvailability()) && getName().equals(availability.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getCodeAvailability(), getName());
     }
 
     @Override
     public String toString() {
         return "ConservationStatus{" +
-                "id=" + id +
+                "id=" + codeAvailability +
                 ", name='" + name + '\'' +
                 '}';
     }

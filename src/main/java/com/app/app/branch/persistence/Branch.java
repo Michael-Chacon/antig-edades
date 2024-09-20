@@ -20,6 +20,7 @@ import java.util.Objects;
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code_branch")
     Long codeBranch;
 
     @Column(nullable = false, length = 20)
@@ -48,7 +49,7 @@ public class Branch {
 
     @Override
     public String toString() {
-        return "Branch{" +
+        return "Antiquity{" +
                 "id=" + codeBranch +
                 ", name='" + name + '\'' +
                 '}';

@@ -16,7 +16,8 @@ import java.util.Objects;
 public class Period {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @Column(name = "code_period")
+    Long codePeriod;
 
     @Column(nullable = false, length = 20)
     @NonNull
@@ -26,18 +27,18 @@ public class Period {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Period category)) return false;
-        return Objects.equals(getId(), category.getId()) && getName().equals(category.getName());
+        return Objects.equals(getCodePeriod(), category.getCodePeriod()) && getName().equals(category.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getCodePeriod(), getName());
     }
 
     @Override
     public String toString() {
         return "City{" +
-                "id=" + id +
+                "id=" + codePeriod +
                 ", name='" + name + '\'' +
                 '}';
     }
