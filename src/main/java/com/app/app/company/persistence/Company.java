@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-            @Column(name = "code_company")
+    @Column(name = "code_company")
     Long codeCompany;
 
     @Column(nullable = false, length = 40)

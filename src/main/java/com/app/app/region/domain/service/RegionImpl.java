@@ -30,10 +30,10 @@ public class RegionImpl implements IRegion {
 
     @Override
     public Region update(Long id, Region region) {
-        return repository.findById(id).map(existPeriod -> {
-            existPeriod.setName(region.getName());
-            existPeriod.setCountry(region.getCountry());
-            return repository.save(existPeriod);
+        return repository.findById(id).map(existElement -> {
+            existElement.setName(region.getName());
+            existElement.setCountry(region.getCountry());
+            return repository.save(existElement);
         }).orElseThrow(() -> new ResourceNotFoundException(Region.class.getName(), id));
     }
 
