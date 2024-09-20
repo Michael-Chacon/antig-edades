@@ -1,6 +1,8 @@
-package com.app.app.country.persistence;
+package com.app.app.region.persistence;
 
+import com.app.app.country.persistence.Country;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,35 +12,38 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "country")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Country {
+@Entity
+@Table(name = "region")
+public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "conde_country")
-    Long codeCountry;
+    Long codeRegion;
 
     @Column(nullable = false, length = 20)
-    @NonNull
+    @NotNull
     String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codeCountry")
+    Country country;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Country category)) return false;
-        return Objects.equals(getCodeCountry(), category.getCodeCountry()) && getName().equals(category.getName());
+        if (!(o instanceof Region category)) return false;
+        return Objects.equals(getCodeRegion(), category.getCodeRegion()) && getName().equals(category.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodeCountry(), getName());
+        return Objects.hash(getCodeRegion(), getName());
     }
 
     @Override
     public String toString() {
         return "City{" +
-                "id=" + codeCountry +
+                "id=" + codeRegion +
                 ", name='" + name + '\'' +
                 '}';
     }

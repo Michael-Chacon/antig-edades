@@ -1,6 +1,8 @@
 package com.app.app.city.persistence;
 
+import com.app.app.region.persistence.Region;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,33 +13,37 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "period")
+@Table(name = "city")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Long codeCity;
 
     @Column(nullable = false, length = 20)
-    @NonNull
+    @NotNull
     String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codeRegion")
+    Region region;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof City category)) return false;
-        return Objects.equals(getId(), category.getId()) && getName().equals(category.getName());
+        return Objects.equals(getCodeCity(), category.getCodeCity()) && getName().equals(category.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getCodeCity(), getName());
     }
 
     @Override
     public String toString() {
         return "City{" +
-                "id=" + id +
+                "id=" + codeCity +
                 ", name='" + name + '\'' +
                 '}';
     }

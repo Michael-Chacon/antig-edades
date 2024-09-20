@@ -32,6 +32,7 @@ public class CityImpl implements ICity {
     public City update(Long id, City city) {
         return repository.findById(id).map(existElement -> {
             existElement.setName(city.getName());
+            existElement.setRegion(city.getRegion());
             return repository.save(existElement);
         }).orElseThrow(() -> new ResourceNotFoundException(City.class.getName(), id));
     }

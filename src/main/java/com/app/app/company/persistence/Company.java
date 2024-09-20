@@ -16,7 +16,8 @@ import java.util.Objects;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+            @Column(name = "code_company")
+    Long codeCompany;
 
     @Column(nullable = false, length = 40)
     @NonNull
@@ -26,18 +27,18 @@ public class Company {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Company company)) return false;
-        return Objects.equals(getId(), company.getId()) && getName().equals(company.getName());
+        return Objects.equals(getCodeCompany(), company.getCodeCompany()) && getName().equals(company.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getCodeCompany(), getName());
     }
 
     @Override
     public String toString() {
         return "company{" +
-                "id=" + id +
+                "id=" + codeCompany +
                 ", name='" + name + '\'' +
                 '}';
     }
