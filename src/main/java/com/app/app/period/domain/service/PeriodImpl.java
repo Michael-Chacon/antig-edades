@@ -30,9 +30,9 @@ public class PeriodImpl implements IPeriod {
 
     @Override
     public Period update(Long id, Period period) {
-        return repository.findById(id).map(existPeriod -> {
-            existPeriod.setName(period.getName());
-            return repository.save(existPeriod);
+        return repository.findById(id).map(existElement -> {
+            existElement.setName(period.getName());
+            return repository.save(existElement);
         }).orElseThrow(() -> new ResourceNotFoundException(Period.class.getName(), id));
     }
 

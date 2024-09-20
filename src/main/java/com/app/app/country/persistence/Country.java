@@ -1,4 +1,4 @@
-package com.app.app.period.persistence;
+package com.app.app.country.persistence;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,9 +11,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "period")
+@Table(name = "country")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Period {
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -25,7 +25,7 @@ public class Period {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Period category)) return false;
+        if (!(o instanceof Country category)) return false;
         return Objects.equals(getId(), category.getId()) && getName().equals(category.getName());
     }
 
