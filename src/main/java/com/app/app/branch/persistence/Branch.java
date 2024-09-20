@@ -23,7 +23,7 @@ public class Branch {
     @Column(name = "code_branch")
     Long codeBranch;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 100)
     @NotNull
     String name;
 
@@ -32,7 +32,7 @@ public class Branch {
     City city;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "companyCode")
+    @JoinColumn(name = "codeCompany")
     Company company;
 
     @Override

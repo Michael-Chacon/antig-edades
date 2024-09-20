@@ -1,13 +1,13 @@
 package com.app.app.gallery.domain.service;
 
-import com.app.app.categoria.persistence.Category;
+import com.app.app.gallery.persistence.Gallery;
 
 import java.util.List;
 
 public interface IGallery {
-    List<Category> findAll();
-    Category findById(Long id);
-    Category save(Category category);
-    Category update(Long id, Category category);
+    List<Gallery> findAll();
+    Gallery findById(Long id);
+    Gallery save(Gallery gallery);
+    Gallery update(Long id, Gallery gallery);
     void delete(Long id);
 }
