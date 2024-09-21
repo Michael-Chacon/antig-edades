@@ -21,4 +21,17 @@ public class UserEmployeeDTO {
     BigDecimal salary;
     LocalDate contractDate;
 
+    @Override
+    public String toString() {
+        return "UserEmployeeDTO{" +
+                "codeUser=" + codeUser +
+                ", name='" + name + '\'' +
+                ", lastnameOne='" + lastnameOne + '\'' +
+                ", lastnameTwo='" + lastnameTwo + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", salary=" + salary +
+                ", contractDate=" + contractDate +
+                '}';
+    }
 }

@@ -28,7 +28,7 @@ public class Employee {
     @NotNull
     LocalDate contractDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "codeUser")
     Users users;
 

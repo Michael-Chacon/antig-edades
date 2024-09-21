@@ -9,6 +9,6 @@ public interface IEmployee {
     List<Employee> findAll();
     Employee findById(Long id);
     UserEmployeeDTO save(UserEmployeeDTO employeeDTO);
-    Employee update(Long id, Employee employee);
+    UserEmployeeDTO update(Long id, UserEmployeeDTO employeeDTO);
     void delete(Long id);
 }
