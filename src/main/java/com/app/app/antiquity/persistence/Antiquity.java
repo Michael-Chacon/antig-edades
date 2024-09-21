@@ -8,7 +8,9 @@ import com.app.app.company.persistence.Company;
 import com.app.app.conservationStatus.persistence.ConservationStatus;
 import com.app.app.period.persistence.Period;
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -30,7 +32,7 @@ public class Antiquity {
     Long codeAntiquity;
 
     @Column(nullable = false, length = 20)
-    @NotNull
+    @IsRequired
     String name;
 
     String description;
@@ -38,7 +40,7 @@ public class Antiquity {
     @NotNull
     BigDecimal price;
 
-    @NotNull
+    @IsRequired
     String origin;
 
     @ManyToOne(fetch = FetchType.EAGER)

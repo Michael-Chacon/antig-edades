@@ -12,6 +12,7 @@ import com.app.app.user.domain.repository.UserRepository;
 import com.app.app.user.persistence.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,16 +27,19 @@ public class TransactionImpl implements ITransaction {
     @Autowired
     private TransactionTypeRepository transactionTypeRepository;
 
+    @Transactional(readOnly = true)
     @Override
     public List<Transaction> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Transaction findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Transaction.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public Transaction save(TransactionDTO transactionDTO) {
         Users users = userRepository.findById(transactionDTO.getUsers()).orElseThrow(() -> new ResourceNotFoundException(Users.class.getName(), transactionDTO.getUsers()));
@@ -48,6 +52,7 @@ public class TransactionImpl implements ITransaction {
         return repository.save(transaction);
     }
 
+    @Transactional
     @Override
     public Transaction update(Long id, TransactionDTO transactionDTO) {
         return repository.findById(id).map(existElement -> {
@@ -60,6 +65,7 @@ public class TransactionImpl implements ITransaction {
         }).orElseThrow(() -> new ResourceNotFoundException(Transaction.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

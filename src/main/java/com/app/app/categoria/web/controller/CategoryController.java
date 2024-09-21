@@ -2,10 +2,13 @@ package com.app.app.categoria.web.controller;
 
 import com.app.app.categoria.domain.service.ICategory;
 import com.app.app.categoria.persistence.Category;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +21,9 @@ public class CategoryController {
     @Autowired
     private ICategory service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories(){
         return ResponseEntity.ok(service.findAll());
@@ -29,7 +35,10 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody Category category){
+    public ResponseEntity<?> createCategory(@Valid @RequestBody Category category, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(category));
     }
 

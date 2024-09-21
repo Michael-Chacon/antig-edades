@@ -5,6 +5,7 @@ import com.app.app.exceptions.ResourceNotFoundException;
 import com.app.app.period.domain.repository.PeriodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,21 +14,25 @@ public class PeriodImpl implements IPeriod {
      @Autowired
     private PeriodRepository repository;
 
-    @Override
+    @Transactional(readOnly = true)
+     @Override
     public List<Period> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Period findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Period.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public Period save(Period period) {
         return repository.save(period);
     }
 
+    @Transactional
     @Override
     public Period update(Long id, Period period) {
         return repository.findById(id).map(existElement -> {
@@ -36,6 +41,7 @@ public class PeriodImpl implements IPeriod {
         }).orElseThrow(() -> new ResourceNotFoundException(Period.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

@@ -13,6 +13,7 @@ import com.app.app.user.domain.repository.UserRepository;
 import com.app.app.user.persistence.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,16 +31,19 @@ public class CollectionistImpl implements ICollectionist {
     @Autowired
     private GenderRepository genderRepository;
 
+    @Transactional(readOnly = true)
     @Override
     public List<Collectionist> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Collectionist findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Collectionist.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public UserCollectionistDTO save(UserCollectionistDTO employeeDto) {
         Users user = UserCollectionistMapper.INSTANCE.toUsers(employeeDto);
@@ -54,6 +58,7 @@ public class CollectionistImpl implements ICollectionist {
         return employeeDto;
     }
 
+    @Transactional
     @Override
     public UserCollectionistDTO update(Long id, UserCollectionistDTO employeeDTO) {
         return repository.findById(id).map(existElement -> {
@@ -78,6 +83,7 @@ public class CollectionistImpl implements ICollectionist {
         }).orElseThrow(() -> new ResourceNotFoundException(Collectionist.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

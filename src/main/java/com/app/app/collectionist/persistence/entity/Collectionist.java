@@ -1,6 +1,7 @@
 package com.app.app.collectionist.persistence.entity;
 
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsItNumerical;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,10 +23,9 @@ public class Collectionist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long codeCollectionist;
 
-    @NotNull
+    @IsItNumerical
     BigDecimal loan;
 
-    @NotNull
     LocalDate contractDate;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})

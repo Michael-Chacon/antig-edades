@@ -1,5 +1,6 @@
 package com.app.app.conservationStatus.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +20,7 @@ public class ConservationStatus {
     @Column(name = "code_status")
     Long codeStatus;
 
-    @NonNull
+    @IsRequired
     String name;
 
     @Override

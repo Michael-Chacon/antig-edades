@@ -3,9 +3,12 @@ package com.app.app.collectionist.controller;
 import com.app.app.collectionist.domain.service.ICollectionist;
 import com.app.app.collectionist.persistence.DTO.UserCollectionistDTO;
 import com.app.app.collectionist.persistence.entity.Collectionist;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +21,9 @@ public class CollectionistController {
     @Autowired
     private ICollectionist service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Collectionist>> getAllCollectionist(){
         return ResponseEntity.ok(service.findAll());
@@ -29,7 +35,10 @@ public class CollectionistController {
     }
 
     @PostMapping
-    public ResponseEntity<UserCollectionistDTO> createCollectionist(@RequestBody UserCollectionistDTO employee){
+    public ResponseEntity<?> createCollectionist(@Valid @RequestBody UserCollectionistDTO employee, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(employee));
     }
 

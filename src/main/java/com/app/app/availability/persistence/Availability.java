@@ -1,5 +1,6 @@
 package com.app.app.availability.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +20,7 @@ public class Availability {
     @Column(name = "code_availability")
     Long codeAvailability;
 
-    @NonNull
+    @IsRequired
     @Column(nullable = false, length = 20)
     String name;
 

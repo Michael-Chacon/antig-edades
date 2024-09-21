@@ -2,9 +2,12 @@ package com.app.app.branch.controller;
 
 import com.app.app.branch.domain.service.IBranch;
 import com.app.app.branch.persistence.Branch;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class BranchController {
     @Autowired
     private IBranch service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Branch>> getAllBranch(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class BranchController {
     }
 
     @PostMapping
-    public ResponseEntity<Branch> createBranch(@RequestBody Branch branch){
+    public ResponseEntity<?> createBranch(@Valid @RequestBody Branch branch, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(branch));
     }
 

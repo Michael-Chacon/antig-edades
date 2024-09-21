@@ -2,9 +2,12 @@ package com.app.app.company.controller;
 
 import com.app.app.company.domain.service.ICompany;
 import com.app.app.company.persistence.Company;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class CompanyController {
     @Autowired
     private ICompany service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Company>> getAllCompany(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<Company> createCompany(@RequestBody Company company){
+    public ResponseEntity<?> createCompany(@Valid @RequestBody Company company, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(company));
     }
 

@@ -2,9 +2,12 @@ package com.app.app.conservationStatus.controller;
 
 import com.app.app.conservationStatus.domain.service.IConservationStatus;
 import com.app.app.conservationStatus.persistence.ConservationStatus;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class ConservationStatusController {
     @Autowired
     private IConservationStatus service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<ConservationStatus>> getAllStatus(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class ConservationStatusController {
     }
 
     @PostMapping
-    public ResponseEntity<ConservationStatus> createStatus(@RequestBody ConservationStatus conservationStatus){
+    public ResponseEntity<?> createStatus(@Valid @RequestBody ConservationStatus conservationStatus, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(conservationStatus));
     }
 

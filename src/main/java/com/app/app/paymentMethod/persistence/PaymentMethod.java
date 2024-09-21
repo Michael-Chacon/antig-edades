@@ -1,5 +1,6 @@
 package com.app.app.paymentMethod.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,7 @@ public class PaymentMethod {
     Long codePaymentMethod;
 
     @Column(nullable = false, length = 60)
-    @NonNull
+    @IsRequired
     String name;
 
     @Override

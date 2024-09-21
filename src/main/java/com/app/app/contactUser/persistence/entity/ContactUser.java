@@ -2,6 +2,7 @@ package com.app.app.contactUser.persistence.entity;
 
 import com.app.app.typeContact.persistence.TypeContact;
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -23,7 +24,7 @@ public class ContactUser {
     Long codeContactUser;
 
     @Column(nullable = false, length = 100)
-    @NotNull
+    @IsRequired
     String contact;
 
     @ManyToOne(fetch = FetchType.EAGER)

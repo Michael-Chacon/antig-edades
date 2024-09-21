@@ -1,5 +1,6 @@
 package com.app.app.gender.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +20,7 @@ public class Gender {
     Long codeGender;
 
     @Column(nullable = false, length = 20)
-    @NonNull
+    @IsRequired
     String name;
 
     @Override

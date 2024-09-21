@@ -2,9 +2,12 @@ package com.app.app.gallery.controller;
 
 import com.app.app.gallery.domain.service.IGallery;
 import com.app.app.gallery.persistence.Gallery;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class GalleryController {
     @Autowired
     private IGallery service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Gallery>> getAllGallery(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class GalleryController {
     }
 
     @PostMapping
-    public ResponseEntity<Gallery> createGallery(@RequestBody Gallery gallery){
+    public ResponseEntity<?> createGallery(@Valid @RequestBody Gallery gallery, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(gallery));
     }
 

@@ -3,9 +3,12 @@ package com.app.app.employee.controller;
 import com.app.app.employee.domain.service.IEmployee;
 import com.app.app.employee.persistence.DTO.UserEmployeeDTO;
 import com.app.app.employee.persistence.entity.Employee;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +21,9 @@ public class EmployeeController {
     @Autowired
     private IEmployee service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Employee>> getAllEmployee(){
         return ResponseEntity.ok(service.findAll());
@@ -29,7 +35,10 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<UserEmployeeDTO> createEmployee(@RequestBody UserEmployeeDTO employee){
+    public ResponseEntity<?> createEmployee(@Valid @RequestBody UserEmployeeDTO employee, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(employee));
     }
 

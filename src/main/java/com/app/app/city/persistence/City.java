@@ -1,6 +1,7 @@
 package com.app.app.city.persistence;
 
 import com.app.app.region.persistence.Region;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,7 +23,7 @@ public class City {
     Long codeCity;
 
     @Column(nullable = false, length = 20)
-    @NotNull
+    @IsRequired
     String name;
 
     @ManyToOne(fetch = FetchType.EAGER)

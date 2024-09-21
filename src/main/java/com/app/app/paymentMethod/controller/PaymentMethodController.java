@@ -2,9 +2,12 @@ package com.app.app.paymentMethod.controller;
 
 import com.app.app.paymentMethod.domain.service.IPaymentMethod;
 import com.app.app.paymentMethod.persistence.PaymentMethod;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class PaymentMethodController {
     @Autowired
     private IPaymentMethod service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<PaymentMethod>> getAllPaymentMethod(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class PaymentMethodController {
     }
 
     @PostMapping
-    public ResponseEntity<PaymentMethod> createCountry(@RequestBody PaymentMethod paymentMethod){
+    public ResponseEntity<?> createCountry(@Valid @RequestBody PaymentMethod paymentMethod, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(paymentMethod));
     }
 

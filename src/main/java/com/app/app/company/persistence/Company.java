@@ -1,5 +1,6 @@
 package com.app.app.company.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,7 @@ public class Company {
     Long codeCompany;
 
     @Column(nullable = false, length = 40)
-    @NonNull
+    @IsRequired
     String name;
 
     @Override

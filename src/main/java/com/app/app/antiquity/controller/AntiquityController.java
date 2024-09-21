@@ -2,9 +2,12 @@ package com.app.app.antiquity.controller;
 
 import com.app.app.antiquity.domain.service.IAntiquity;
 import com.app.app.antiquity.persistence.Antiquity;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class AntiquityController {
     @Autowired
     private IAntiquity service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Antiquity>> getAllAntiquity(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class AntiquityController {
     }
 
     @PostMapping
-    public ResponseEntity<Antiquity> createAntiquity(@RequestBody Antiquity antiquity){
+    public ResponseEntity<?> createAntiquity(@Valid @RequestBody Antiquity antiquity, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(antiquity));
     }
 

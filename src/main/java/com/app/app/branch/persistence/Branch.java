@@ -3,6 +3,7 @@ package com.app.app.branch.persistence;
 import com.app.app.city.persistence.City;
 import com.app.app.company.persistence.Company;
 import com.app.app.country.persistence.Country;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -24,7 +25,7 @@ public class Branch {
     Long codeBranch;
 
     @Column(nullable = false, length = 100)
-    @NotNull
+    @IsRequired
     String name;
 
     @ManyToOne(fetch = FetchType.EAGER)

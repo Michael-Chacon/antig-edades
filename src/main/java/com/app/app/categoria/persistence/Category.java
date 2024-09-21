@@ -1,5 +1,6 @@
 package com.app.app.categoria.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +20,7 @@ public class Category {
     @Column(name = "code_category")
     Long codeCategory;
 
-    @NonNull
+    @IsRequired
     String name;
 
     @Override

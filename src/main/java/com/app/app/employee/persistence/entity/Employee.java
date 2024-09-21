@@ -1,6 +1,8 @@
 package com.app.app.employee.persistence.entity;
 
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsItNumerical;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,10 +24,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long codeEmployee;
 
-    @NotNull
+    @IsItNumerical
     BigDecimal salary;
 
-    @NotNull
     LocalDate contractDate;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})

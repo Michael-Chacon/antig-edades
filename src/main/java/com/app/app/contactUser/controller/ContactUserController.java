@@ -3,9 +3,12 @@ package com.app.app.contactUser.controller;
 import com.app.app.contactUser.domain.service.IContactUser;
 import com.app.app.contactUser.persistence.DTO.ContactUserDTO;
 import com.app.app.contactUser.persistence.entity.ContactUser;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +21,9 @@ public class ContactUserController {
     @Autowired
     private IContactUser service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<ContactUser>> getAllContactUser(){
         return ResponseEntity.ok(service.findAll());
@@ -29,7 +35,10 @@ public class ContactUserController {
     }
 
     @PostMapping
-    public ResponseEntity<ContactUser> createContactUser(@RequestBody ContactUserDTO contactUser){
+    public ResponseEntity<?> createContactUser(@Valid @RequestBody ContactUserDTO contactUser, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(contactUser));
     }
 

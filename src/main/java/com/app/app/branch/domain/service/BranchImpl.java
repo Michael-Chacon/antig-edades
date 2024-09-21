@@ -5,6 +5,7 @@ import com.app.app.branch.persistence.Branch;
 import com.app.app.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,16 +19,19 @@ public class BranchImpl implements IBranch {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Branch findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Branch.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public Branch save(Branch branch) {
         return repository.save(branch);
     }
 
+    @Transactional
     @Override
     public Branch update(Long id, Branch branch) {
         return repository.findById(id).map(existElement -> {
@@ -38,6 +42,7 @@ public class BranchImpl implements IBranch {
         }).orElseThrow(() -> new ResourceNotFoundException(Branch.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

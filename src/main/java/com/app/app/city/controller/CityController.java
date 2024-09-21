@@ -2,9 +2,12 @@ package com.app.app.city.controller;
 
 import com.app.app.city.domain.service.ICity;
 import com.app.app.city.persistence.City;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class CityController {
     @Autowired
     private ICity service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<City>> getAllCity(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<City> createCity(@RequestBody City city){
+    public ResponseEntity<?> createCity(@Valid @RequestBody City city, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(city));
     }
 

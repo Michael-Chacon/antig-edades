@@ -2,9 +2,12 @@ package com.app.app.user.controller;
 
 import com.app.app.user.domain.service.IUsers;
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class UsersController {
     @Autowired
     private IUsers service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Users>> getAllUsers(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class UsersController {
     }
 
     @PostMapping
-    public ResponseEntity<Users> createUsers(@RequestBody Users users){
+    public ResponseEntity<?> createUsers(@Valid @RequestBody Users users, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(users));
     }
 

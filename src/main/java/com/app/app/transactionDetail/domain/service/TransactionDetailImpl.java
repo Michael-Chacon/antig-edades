@@ -14,6 +14,7 @@ import com.app.app.user.domain.repository.UserRepository;
 import com.app.app.user.persistence.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,16 +31,19 @@ public class TransactionDetailImpl implements ITransactionDetail {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Transactional(readOnly = true)
     @Override
     public List<TransactionDetail> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public TransactionDetail findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(TransactionDetail.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public TransactionDetail save(TransactionDetailDTO dto) {
         PaymentMethod paymentMethod = paymentRepository.findById(dto.getPaymentMethod()).orElseThrow(() -> new ResourceNotFoundException(PaymentMethod.class.getName(), dto.getPaymentMethod()));
@@ -57,6 +61,7 @@ public class TransactionDetailImpl implements ITransactionDetail {
         return repository.save(transactionDetail);
     }
 
+    @Transactional
     @Override
     public TransactionDetail update(Long id, TransactionDetailDTO dto) {
         return repository.findById(id).map(existElement -> {
@@ -75,6 +80,7 @@ public class TransactionDetailImpl implements ITransactionDetail {
         }).orElseThrow(() -> new ResourceNotFoundException(TransactionDetail.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

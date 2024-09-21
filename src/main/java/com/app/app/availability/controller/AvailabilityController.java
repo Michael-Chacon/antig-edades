@@ -2,9 +2,12 @@ package com.app.app.availability.controller;
 
 import com.app.app.availability.domain.service.IAvailability;
 import com.app.app.availability.persistence.Availability;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class AvailabilityController {
     @Autowired
     private IAvailability service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Availability>> getAllAvailability(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class AvailabilityController {
     }
 
     @PostMapping
-    public ResponseEntity<Availability> createAvailability(@RequestBody Availability availability){
+    public ResponseEntity<?> createAvailability(@Valid @RequestBody Availability availability, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(availability));
     }
 

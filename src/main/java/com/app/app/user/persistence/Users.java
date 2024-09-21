@@ -3,6 +3,7 @@ package com.app.app.user.persistence;
 import com.app.app.branch.persistence.Branch;
 import com.app.app.country.persistence.Country;
 import com.app.app.gender.persistence.Gender;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -23,22 +24,22 @@ public class Users {
     Long codeUser;
 
     @Column(nullable = false, length = 20)
-    @NotNull
+    @IsRequired
     String name;
 
     @Column(name = "lastname_one", nullable = false, length = 15)
-    @NotNull
+    @IsRequired
     String lastnameOne;
 
     @Column(name = "lastname_two", nullable = true, length = 15)
     String lastnameTwo;
 
     @Column(nullable = false, length = 40)
-    @NotNull
+    @IsRequired
     String email;
 
     @Column(nullable = false, length = 255)
-    @NotNull
+    @IsRequired
     String password;
 
     @ManyToOne(fetch = FetchType.EAGER)

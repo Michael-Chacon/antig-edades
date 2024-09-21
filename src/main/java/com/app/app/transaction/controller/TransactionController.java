@@ -3,9 +3,12 @@ package com.app.app.transaction.controller;
 import com.app.app.transaction.domain.service.ITransaction;
 import com.app.app.transaction.persistence.DTO.TransactionDTO;
 import com.app.app.transaction.persistence.entity.Transaction;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +21,9 @@ public class TransactionController {
     @Autowired
     private ITransaction service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Transaction>> getAllTransaction(){
         return ResponseEntity.ok(service.findAll());
@@ -29,7 +35,10 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTO contactUser){
+    public ResponseEntity<?> createTransaction(@Valid @RequestBody TransactionDTO contactUser, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(contactUser));
     }
 

@@ -2,9 +2,12 @@ package com.app.app.period.web.controller;
 
 import com.app.app.period.domain.service.IPeriod;
 import com.app.app.period.persistence.Period;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class PeriodController {
     @Autowired
     private IPeriod service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Period>> getAllCategories(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class PeriodController {
     }
 
     @PostMapping
-    public ResponseEntity<Period> createPeriod(@RequestBody Period period){
+    public ResponseEntity<?> createPeriod(@Valid @RequestBody Period period, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(period));
     }
 

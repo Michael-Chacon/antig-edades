@@ -13,6 +13,7 @@ import com.app.app.user.domain.repository.UserRepository;
 import com.app.app.user.persistence.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,16 +31,19 @@ public class EmployeeImpl implements IEmployee {
     @Autowired
     private GenderRepository genderRepository;
 
+    @Transactional(readOnly = true)
     @Override
     public List<Employee> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Employee findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Employee.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public UserEmployeeDTO save(UserEmployeeDTO employeeDto) {
         Users user = UserEmployeeMapper.INSTANCE.toUsers(employeeDto);
@@ -54,6 +58,7 @@ public class EmployeeImpl implements IEmployee {
         return employeeDto;
     }
 
+    @Transactional
     @Override
     public UserEmployeeDTO update(Long id, UserEmployeeDTO employeeDTO) {
         return repository.findById(id).map(existElement -> {
@@ -78,6 +83,7 @@ public class EmployeeImpl implements IEmployee {
         }).orElseThrow(() -> new ResourceNotFoundException(Employee.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

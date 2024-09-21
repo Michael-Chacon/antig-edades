@@ -2,6 +2,7 @@ package com.app.app.gallery.persistence;
 
 import com.app.app.antiquity.persistence.Antiquity;
 import com.app.app.country.persistence.Country;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,7 +23,7 @@ public class Gallery {
     Long codeGallery;
 
     @Column(nullable = false)
-    @NotNull
+    @IsRequired
     String urlPhoto;
 
     @ManyToOne(fetch = FetchType.EAGER)

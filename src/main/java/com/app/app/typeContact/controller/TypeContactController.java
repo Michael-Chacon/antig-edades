@@ -2,9 +2,12 @@ package com.app.app.typeContact.controller;
 
 import com.app.app.typeContact.domain.service.ITypeContact;
 import com.app.app.typeContact.persistence.TypeContact;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class TypeContactController {
     @Autowired
     private ITypeContact service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<TypeContact>> getAllTContact(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class TypeContactController {
     }
 
     @PostMapping
-    public ResponseEntity<TypeContact> createTContact(@RequestBody TypeContact typeContact){
+    public ResponseEntity<?> createTContact(@Valid @RequestBody TypeContact typeContact, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(typeContact));
     }
 

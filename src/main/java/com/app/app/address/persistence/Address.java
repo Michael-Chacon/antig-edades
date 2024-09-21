@@ -4,7 +4,9 @@ import com.app.app.city.persistence.City;
 import com.app.app.company.persistence.Company;
 import com.app.app.typeAddress.persistence.TypeAddress;
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -25,7 +27,7 @@ public class Address {
     Long codeAddress;
 
     @Column(nullable = false, length = 100)
-    @NotNull
+    @IsRequired
     String address;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -2,9 +2,12 @@ package com.app.app.country.controller;
 
 import com.app.app.country.domain.service.ICountry;
 import com.app.app.country.persistence.Country;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class CountryController {
     @Autowired
     private ICountry service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Country>> getAllCountry(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class CountryController {
     }
 
     @PostMapping
-    public ResponseEntity<Country> createCountry(@RequestBody Country country){
+    public ResponseEntity<?> create(@Valid @RequestBody Country country, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(country));
     }
 

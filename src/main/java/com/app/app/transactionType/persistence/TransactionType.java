@@ -1,5 +1,6 @@
 package com.app.app.transactionType.persistence;
 
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,7 @@ public class TransactionType {
     Long codeTransactionType;
 
     @Column(nullable = false, length = 50)
-    @NonNull
+    @IsRequired
     String name;
 
     @Override

@@ -2,9 +2,12 @@ package com.app.app.region.controller;
 
 import com.app.app.region.domain.service.IRegion;
 import com.app.app.region.persistence.Region;
+import com.app.app.utils.MakeValidation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class RegionController {
     @Autowired
     private IRegion service;
 
+    @Autowired
+    private MakeValidation makeValidation;
+
     @GetMapping
     public ResponseEntity<List<Region>> getAllRegion(){
         return ResponseEntity.ok(service.findAll());
@@ -28,7 +34,10 @@ public class RegionController {
     }
 
     @PostMapping
-    public ResponseEntity<Region> createRegion(@RequestBody Region region){
+    public ResponseEntity<?> createRegion(@Valid @RequestBody Region region, BindingResult result){
+        if (result.hasFieldErrors()){
+            return makeValidation.validation(result);
+        }
         return ResponseEntity.ok(service.save(region));
     }
 

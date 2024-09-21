@@ -4,6 +4,7 @@ import com.app.app.antiquity.persistence.Antiquity;
 import com.app.app.paymentMethod.persistence.PaymentMethod;
 import com.app.app.transaction.persistence.entity.Transaction;
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsItNumerical;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

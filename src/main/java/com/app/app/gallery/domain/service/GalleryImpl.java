@@ -5,6 +5,7 @@ import com.app.app.gallery.domain.repository.GalleryRepository;
 import com.app.app.gallery.persistence.Gallery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,21 +14,25 @@ public class GalleryImpl implements IGallery {
      @Autowired
     private GalleryRepository repository;
 
-    @Override
+    @Transactional(readOnly = true)
+     @Override
     public List<Gallery> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Gallery findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Gallery.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public Gallery save(Gallery gallery) {
         return repository.save(gallery);
     }
 
+    @Transactional
     @Override
     public Gallery update(Long id, Gallery gallery) {
         return repository.findById(id).map(existElement -> {
@@ -37,6 +42,7 @@ public class GalleryImpl implements IGallery {
         }).orElseThrow(() -> new ResourceNotFoundException(Gallery.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

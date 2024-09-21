@@ -10,6 +10,7 @@ import com.app.app.user.domain.repository.UserRepository;
 import com.app.app.user.persistence.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,16 +25,19 @@ public class ContactUserImpl implements IContactUser {
     @Autowired
     private TypeContactRepository contactRepository;
 
+    @Transactional(readOnly = true)
     @Override
     public List<ContactUser> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ContactUser findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ContactUser.class.getName(), id));
     }
 
+    @Transactional
     @Override
     public ContactUser save(ContactUserDTO contactUserDTO) {
         Users users = userRepository.findById(contactUserDTO.getUsers()).orElseThrow(() -> new ResourceNotFoundException(Users.class.getName(), contactUserDTO.getUsers()));
@@ -46,6 +50,7 @@ public class ContactUserImpl implements IContactUser {
         return repository.save(contactUser);
     }
 
+    @Transactional
     @Override
     public ContactUser update(Long id, ContactUserDTO contactUserDTO) {
         return repository.findById(id).map(existElement -> {
@@ -56,6 +61,7 @@ public class ContactUserImpl implements IContactUser {
         }).orElseThrow(() -> new ResourceNotFoundException(ContactUser.class.getName(), id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

@@ -3,6 +3,7 @@ package com.app.app.transaction.persistence.entity;
 import com.app.app.transactionType.persistence.TransactionType;
 import com.app.app.typeContact.persistence.TypeContact;
 import com.app.app.user.persistence.Users;
+import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -25,7 +26,6 @@ public class Transaction {
     Long codeTransaction;
 
     @Column(nullable = false, length = 100)
-    @NotNull
     LocalDate dateTransaction;
 
     @ManyToOne(fetch = FetchType.EAGER)
