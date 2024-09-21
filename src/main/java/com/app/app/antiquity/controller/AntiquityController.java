@@ -1,5 +1,6 @@
 package com.app.app.antiquity.controller;
 
+import com.app.app.antiquity.DTO.AvailableDTO;
 import com.app.app.antiquity.domain.service.IAntiquity;
 import com.app.app.antiquity.persistence.Antiquity;
 import com.app.app.utils.MakeValidation;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.app.app.consts.GeneralConst.ID_IN_PATH;
 
@@ -50,6 +52,11 @@ public class AntiquityController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/forSold")
+    public ResponseEntity<List<AvailableDTO>> getAvailableForSold(){
+        return ResponseEntity.ok(service.availableForSold());
     }
 
 }

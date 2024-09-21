@@ -1,5 +1,6 @@
 package com.app.app.antiquity.domain.service;
 
+import com.app.app.antiquity.DTO.AvailableDTO;
 import com.app.app.antiquity.domain.repository.AntiquityRepository;
 import com.app.app.antiquity.persistence.Antiquity;
 import com.app.app.exceptions.ResourceNotFoundException;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AntiquityImpl implements IAntiquity {
@@ -47,9 +49,15 @@ public class AntiquityImpl implements IAntiquity {
         }).orElseThrow(() -> new ResourceNotFoundException(Antiquity.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<AvailableDTO> availableForSold() {
+        return repository.findAntiquityByAvailableStatus();
     }
 }
