@@ -44,49 +44,25 @@ public class EmployeeImpl implements IEmployee {
         return employeeDto;
     }
 
-//    @Override
-//    public UserEmployeeDTO update(Long id, UserEmployeeDTO employeeDTO) {
-//        return repository.findById(id).map(existElement -> {
-//            Users users = UserEmployeeMapper.INSTANCE.toUsers(employeeDTO);
-//            userRepository.save(users);
-//            Employee employee = UserEmployeeMapper.INSTANCE.toEmployee(employeeDTO);
-//            existElement.setSalary(employee.getSalary());
-//            existElement.setContractDate(employee.getContractDate());
-//            existElement.setUsers(users);
-//             repository.save(existElement);
-//             return employeeDTO;
-//        }).orElseThrow(() -> new ResourceNotFoundException(Employee.class.getName(), id));
-//    }
-
     @Override
     public UserEmployeeDTO update(Long id, UserEmployeeDTO employeeDTO) {
         return repository.findById(id).map(existElement -> {
-            // Busca el usuario asociado al empleado existente
             Users existingUser = existElement.getUsers();
 
-            // Convierte el DTO a entidad Users
             Users updatedUser = UserEmployeeMapper.INSTANCE.toUsers(employeeDTO);
-
-            // Actualiza los campos del usuario existente
             existingUser.setName(updatedUser.getName());
+            existingUser.setLastnameOne(updatedUser.getLastnameOne());
+            existingUser.setLastnameTwo(updatedUser.getLastnameTwo());
             existingUser.setEmail(updatedUser.getEmail());
-            // ... actualiza otros campos según sea necesario
-
-            // Guarda el usuario actualizado
             userRepository.save(existingUser);
 
-            // Convierte el DTO a entidad Employee
             Employee updatedEmployee = UserEmployeeMapper.INSTANCE.toEmployee(employeeDTO);
-
-            // Actualiza los campos del empleado existente
             existElement.setSalary(updatedEmployee.getSalary());
             existElement.setContractDate(updatedEmployee.getContractDate());
             existElement.setUsers(existingUser);
-
-            // Guarda los cambios en la entidad Employee
             repository.save(existElement);
 
-            return employeeDTO; // Devuelve el DTO actualizado
+            return employeeDTO;
         }).orElseThrow(() -> new ResourceNotFoundException(Employee.class.getName(), id));
     }
 
