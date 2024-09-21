@@ -16,6 +16,8 @@ INSERT INTO gender (name) VALUES ('Masculino'), ('Femenino'), ('No Binario'), ('
 INSERT INTO type_contact (name) VALUES ('Personal'), ('Trabajo');
 INSERT INTO payment_method (name) VALUES ('TARJETA_DE_CREDITO'), ('TARJETA_DE_DEBITO'), ('TRANSFERENCIA_BANCARIA'), ('PAYPAL'), ('EFECTIVO'), ('BITCOIN'), ('APPLE_PAY'), ('GOOGLE_PAY'), ('CHEQUE');
 INSERT INTO transaction_type (name) VALUES ('compra'), ('pago'), ('reembolso');
+INSERT INTO transactions (date_transaction, code_user, code_transaction_type) VALUES ('2024-09-20', 1, 1), ('2024-09-21', 2, 2), ('2024-09-22', 3, 3);
+
 
 
 

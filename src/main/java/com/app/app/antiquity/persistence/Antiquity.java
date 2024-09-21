@@ -7,6 +7,7 @@ import com.app.app.city.persistence.City;
 import com.app.app.company.persistence.Company;
 import com.app.app.conservationStatus.persistence.ConservationStatus;
 import com.app.app.period.persistence.Period;
+import com.app.app.user.persistence.Users;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

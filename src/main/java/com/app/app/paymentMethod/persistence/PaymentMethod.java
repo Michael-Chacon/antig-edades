@@ -16,10 +16,10 @@ import java.util.Objects;
 public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "conde_country")
-    Long codeCountry;
+    @Column(name = "conde_payment_method")
+    Long codePaymentMethod;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 60)
     @NonNull
     String name;
 
@@ -27,18 +27,18 @@ public class PaymentMethod {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PaymentMethod category)) return false;
-        return Objects.equals(getCodeCountry(), category.getCodeCountry()) && getName().equals(category.getName());
+        return Objects.equals(getCodePaymentMethod(), category.getCodePaymentMethod()) && getName().equals(category.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodeCountry(), getName());
+        return Objects.hash(getCodePaymentMethod(), getName());
     }
 
     @Override
     public String toString() {
         return "City{" +
-                "id=" + codeCountry +
+                "id=" + codePaymentMethod +
                 ", name='" + name + '\'' +
                 '}';
     }
