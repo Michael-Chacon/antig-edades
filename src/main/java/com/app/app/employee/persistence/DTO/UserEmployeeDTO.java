@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class UserEmployeeDTO {
     Long codeUser;
     Long codeBranch;
+    Long codeGender;
     String name;
     String lastnameOne;
     String lastnameTwo;
@@ -27,6 +28,7 @@ public class UserEmployeeDTO {
         return "UserEmployeeDTO{" +
                 "codeUser=" + codeUser +
                 ", branchCode=" + codeBranch +
+                ", genderCode=" + codeGender +
                 ", name='" + name + '\'' +
                 ", lastnameOne='" + lastnameOne + '\'' +
                 ", lastnameTwo='" + lastnameTwo + '\'' +

@@ -2,6 +2,7 @@ package com.app.app.user.persistence;
 
 import com.app.app.branch.persistence.Branch;
 import com.app.app.country.persistence.Country;
+import com.app.app.gender.persistence.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -43,6 +44,10 @@ public class Users {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codeBranch")
     Branch branch;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codeGender")
+    Gender gender;
 
     @Override
     public boolean equals(Object o) {
