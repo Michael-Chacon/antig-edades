@@ -1,5 +1,7 @@
 package com.app.app.employee.domain.service;
 
+import com.app.app.branch.domain.repository.BranchRepository;
+import com.app.app.branch.persistence.Branch;
 import com.app.app.employee.domain.repository.EmployeeRepository;
 import com.app.app.employee.persistence.DTO.UserEmployeeDTO;
 import com.app.app.employee.persistence.entity.Employee;
@@ -20,6 +22,9 @@ public class EmployeeImpl implements IEmployee {
      @Autowired
      private UserRepository userRepository;
 
+     @Autowired
+     private BranchRepository branchRepository;
+
     @Override
     public List<Employee> findAll() {
         return repository.findAll();
@@ -34,7 +39,9 @@ public class EmployeeImpl implements IEmployee {
     public UserEmployeeDTO save(UserEmployeeDTO employeeDto) {
         System.out.println("---------------------"+employeeDto);
         Users user = UserEmployeeMapper.INSTANCE.toUsers(employeeDto);
+        Branch branch = branchRepository.findById(employeeDto.getCodeBranch()).orElseThrow(() -> new ResourceNotFoundException(Branch.class.getName(), employeeDto.getCodeBranch()));
         System.out.println("================="+user);
+        user.setBranch(branch);
         Users aaa =  userRepository.save(user);
         System.out.println("_______________"+aaa);
         // Mapea el DTO a Employee, relaciona con Users y guarda

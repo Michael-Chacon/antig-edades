@@ -1,5 +1,6 @@
 package com.app.app.user.persistence;
 
+import com.app.app.branch.persistence.Branch;
 import com.app.app.country.persistence.Country;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +39,10 @@ public class Users {
     @Column(nullable = false, length = 255)
     @NotNull
     String password;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codeBranch")
+    Branch branch;
 
     @Override
     public boolean equals(Object o) {

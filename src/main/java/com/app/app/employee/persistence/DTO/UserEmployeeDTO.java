@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserEmployeeDTO {
     Long codeUser;
+    Long codeBranch;
     String name;
     String lastnameOne;
     String lastnameTwo;
@@ -25,6 +26,7 @@ public class UserEmployeeDTO {
     public String toString() {
         return "UserEmployeeDTO{" +
                 "codeUser=" + codeUser +
+                ", branchCode=" + codeBranch +
                 ", name='" + name + '\'' +
                 ", lastnameOne='" + lastnameOne + '\'' +
                 ", lastnameTwo='" + lastnameTwo + '\'' +
