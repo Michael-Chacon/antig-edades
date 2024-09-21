@@ -13,6 +13,9 @@ INSERT INTO type_address (name) VALUES('Residencial'), ('Comercial'), ('Industri
 INSERT INTO users (name, lastname_one, lastname_two, email, password) VALUES ('Juan', 'Pérez', 'Gómez', 'juan.perez@example.com', 'password123'), ('María', 'López', 'Hernández', 'maria.lopez@example.com', 'securepass456'), ('Carlos', 'Rodríguez', 'Martínez', 'carlos.rodriguez@example.com', 'mypassword789'), ('Ana', 'García', 'Ruiz', 'ana.garcia@example.com', 'strongpass012'), ('Luis', 'Fernández', 'Santos', 'luis.fernandez@example.com', 'passwordsecure345');
 INSERT INTO address (address, code_user, code_type_address, code_city) VALUES ("Cra 1, Cll 1 - 2", 1, 3, 2);
 INSERT INTO gender (name) VALUES ('Masculino'), ('Femenino'), ('No Binario'), ('Prefiere no decir'), ('Otro');
+INSERT INTO type_contact (name) VALUES ('Personal'), ('Trabajo');
+INSERT INTO payment_method (name) VALUES ('TARJETA_DE_CREDITO'), ('TARJETA_DE_DEBITO'), ('TRANSFERENCIA_BANCARIA'), ('PAYPAL'), ('EFECTIVO'), ('BITCOIN'), ('APPLE_PAY'), ('GOOGLE_PAY'), ('CHEQUE');
+
 
 
 
