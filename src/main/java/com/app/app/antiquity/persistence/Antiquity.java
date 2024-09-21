@@ -61,6 +61,10 @@ public class Antiquity {
     @JoinColumn(name = "codeBranch")
     Branch branch;
 
+    @ManyToOne
+    @JoinColumn(name = "codeUser")
+    Users owner;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

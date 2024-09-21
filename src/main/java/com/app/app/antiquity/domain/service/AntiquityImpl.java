@@ -37,6 +37,7 @@ public class AntiquityImpl implements IAntiquity {
             existElement.setConservationStatus(antiquity.getConservationStatus());
             existElement.setAvailability(antiquity.getAvailability());
             existElement.setBranch(antiquity.getBranch());
+            existElement.setOwner(antiquity.getOwner());
             return repository.save(existElement);
         }).orElseThrow(() -> new ResourceNotFoundException(Antiquity.class.getName(), id));
     }
