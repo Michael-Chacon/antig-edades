@@ -1,8 +1,6 @@
-package com.app.app.address.persistence;
+package com.app.app.contactUser.persistence.entity;
 
-import com.app.app.city.persistence.City;
-import com.app.app.company.persistence.Company;
-import com.app.app.typeAddress.persistence.TypeAddress;
+import com.app.app.typeContact.persistence.TypeContact;
 import com.app.app.user.persistence.Users;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -17,46 +15,41 @@ import java.util.Objects;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "address")
-public class Address {
+@Table(name = "contact_user")
+public class ContactUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_address")
-    Long codeAddress;
+    @Column(name = "code_contact_user")
+    Long codeContactUser;
 
     @Column(nullable = false, length = 100)
     @NotNull
-    String address;
+    String contact;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codeUser")
     Users users;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "codeTypeAddress")
-    TypeAddress typeAddress;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "codeCity")
-    City city;
-
+    @JoinColumn(name = "codeTypeContact")
+    TypeContact typeContact;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Address address)) return false;
-        return Objects.equals(getCodeAddress(), address.getCodeAddress()) && Objects.equals(getAddress(), address.getAddress());
+        if (!(o instanceof ContactUser contactUser)) return false;
+        return Objects.equals(getCodeContactUser(), contactUser.getCodeContactUser()) && Objects.equals(getContact(), contactUser.getContact());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodeAddress(), getAddress());
+        return Objects.hash(getCodeContactUser(), getContact());
     }
 
     @Override
     public String toString() {
         return "ContactUser{" +
-                "codeAddress=" + codeAddress +
-                ", name='" + address + '\'' +
+                "codeAddress=" + codeContactUser +
+                ", name='" + contact + '\'' +
                 '}';
     }
 }
