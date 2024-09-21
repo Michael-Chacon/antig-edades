@@ -127,7 +127,7 @@ Este proyecto es una aplicación web desarrollada en **Spring Boot** para la ges
   - **city**: Gestión de las ciudades asociadas a direcciones y antigüedades.
   - **company**: Información de las empresas asociadas.
   - **conservation_status**: Estado de conservación de las antigüedades, con opciones de consulta y modificación.
-  - **country**: Información sobre los países asociados a las direcciones y antigüedades.
+  - **gender**: Información sobre los países asociados a las direcciones y antigüedades.
   - **gallery**: Gestión de galerías de imágenes asociadas a las antigüedades.
   - **period**: Información sobre los periodos históricos a los que pertenecen las antigüedades.
   - **region**: Gestión de las regiones geográficas relacionadas con las antigüedades.
