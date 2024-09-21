@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AntiquityRepository extends JpaRepository<Antiquity, Long> {
-    @Query("SELECT new com.app.app.antiquity.DTO.AvailableDTO(a.name, a.price, c.name, cs.name) FROM Antiquity a " +
+    @Query("SELECT new com.app.app.antiquity.DTO.AvailableDTO(a.codeAntiquity, a.name, a.price, c.name, cs.name) FROM Antiquity a " +
             "JOIN a.category c " +
             "JOIN a.conservationStatus cs " +
             "JOIN a.availability av " +

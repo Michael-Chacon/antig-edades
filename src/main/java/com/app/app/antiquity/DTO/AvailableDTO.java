@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AvailableDTO {
+    Long idAntiquity;
     String name;
     BigDecimal price;
     String category;
