@@ -37,14 +37,10 @@ public class EmployeeImpl implements IEmployee {
 
     @Override
     public UserEmployeeDTO save(UserEmployeeDTO employeeDto) {
-        System.out.println("---------------------"+employeeDto);
         Users user = UserEmployeeMapper.INSTANCE.toUsers(employeeDto);
         Branch branch = branchRepository.findById(employeeDto.getCodeBranch()).orElseThrow(() -> new ResourceNotFoundException(Branch.class.getName(), employeeDto.getCodeBranch()));
-        System.out.println("================="+user);
         user.setBranch(branch);
-        Users aaa =  userRepository.save(user);
-        System.out.println("_______________"+aaa);
-        // Mapea el DTO a Employee, relaciona con Users y guarda
+        userRepository.save(user);
         Employee employee = UserEmployeeMapper.INSTANCE.toEmployee(employeeDto);
         employee.setUsers(user);
         repository.save(employee);
@@ -55,13 +51,14 @@ public class EmployeeImpl implements IEmployee {
     public UserEmployeeDTO update(Long id, UserEmployeeDTO employeeDTO) {
         return repository.findById(id).map(existElement -> {
             Users existingUser = existElement.getUsers();
+            Branch newBranch = branchRepository.findById(employeeDTO.getCodeBranch()).orElseThrow(() -> new ResourceNotFoundException(Branch.class.getName(), employeeDTO.getCodeBranch()));
 
             Users updatedUser = UserEmployeeMapper.INSTANCE.toUsers(employeeDTO);
             existingUser.setName(updatedUser.getName());
             existingUser.setLastnameOne(updatedUser.getLastnameOne());
             existingUser.setLastnameTwo(updatedUser.getLastnameTwo());
             existingUser.setEmail(updatedUser.getEmail());
-            userRepository.save(existingUser);
+            existingUser.setBranch(newBranch);
 
             Employee updatedEmployee = UserEmployeeMapper.INSTANCE.toEmployee(employeeDTO);
             existElement.setSalary(updatedEmployee.getSalary());
