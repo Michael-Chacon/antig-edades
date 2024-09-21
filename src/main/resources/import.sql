@@ -15,7 +15,7 @@ INSERT INTO address (address, code_user, code_type_address, code_city) VALUES ("
 INSERT INTO gender (name) VALUES ('Masculino'), ('Femenino'), ('No Binario'), ('Prefiere no decir'), ('Otro');
 INSERT INTO type_contact (name) VALUES ('Personal'), ('Trabajo');
 INSERT INTO payment_method (name) VALUES ('TARJETA_DE_CREDITO'), ('TARJETA_DE_DEBITO'), ('TRANSFERENCIA_BANCARIA'), ('PAYPAL'), ('EFECTIVO'), ('BITCOIN'), ('APPLE_PAY'), ('GOOGLE_PAY'), ('CHEQUE');
-
+INSERT INTO transaction_type (name) VALUES ('compra'), ('pago'), ('reembolso');
 
 
 
