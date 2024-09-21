@@ -54,7 +54,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "ContactUser{" +
+        return "Transaction{" +
                 "codeAddress=" + codeAddress +
                 ", name='" + address + '\'' +
                 '}';

@@ -42,7 +42,7 @@ Este proyecto es una aplicación web desarrollada en **Spring Boot** para la ges
 
     - `Antiquity`: Clase que mapea la entidad `Antiquity` con la tabla correspondiente en la base de datos.
 
-  Esta misma estructura se sigue para todas las entidades del proyecto, como `collectionist`, `contactUser`, `period`, entre otras, garantizando una separación clara entre las responsabilidades de cada capa.
+  Esta misma estructura se sigue para todas las entidades del proyecto, como `collectionist`, `transaction`, `period`, entre otras, garantizando una separación clara entre las responsabilidades de cada capa.
 
   ## Endpoints para CRUD de Entidades
 
@@ -119,7 +119,7 @@ Este proyecto es una aplicación web desarrollada en **Spring Boot** para la ges
 
 - El proyecto contiene las siguientes tablas, y cada una de ellas cuenta con su propio CRUD (Create, Read, Update, Delete) implementado:
 
-  - **contactUser**: Gestión de las direcciones asociadas a usuarios y antigüedades.
+  - **transaction**: Gestión de las direcciones asociadas a usuarios y antigüedades.
   - **antiquity**: Catálogo de antigüedades, donde se pueden registrar, modificar, consultar y eliminar piezas.
   - **availability**: Gestión de la disponibilidad de antigüedades.
   - **branch**: Información sobre las distintas sucursales o puntos de venta.
