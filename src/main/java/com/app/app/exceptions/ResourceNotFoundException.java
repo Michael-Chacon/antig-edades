@@ -12,6 +12,7 @@ public class ResourceNotFoundException extends ResponseStatusException {
     * Creé este método porque olvidé utilizar getSimpleName() de la clase, y en su lugar usé getName(),
     * lo cual devuelve la ruta completa de la clase.
     * */
+
     public static String getNameClass(String path){
         int getLastPoint = path.lastIndexOf(".");
         return path.substring(getLastPoint + 1);
