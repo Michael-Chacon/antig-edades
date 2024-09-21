@@ -1,4 +1,4 @@
-package com.app.app.employee.persistence.entity;
+package com.app.app.collectionist.persistence.entity;
 
 import com.app.app.user.persistence.Users;
 import jakarta.persistence.*;
@@ -16,14 +16,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name = "collectionist")
+public class Collectionist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long codeEmployee;
+    Long codeCollectionist;
 
     @NotNull
-    BigDecimal salary;
+    BigDecimal loan;
 
     @NotNull
     LocalDate contractDate;
@@ -35,20 +35,20 @@ public class Employee {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Employee employee)) return false;
-        return Objects.equals(getCodeEmployee(), employee.getCodeEmployee()) && Objects.equals(getSalary(), employee.getSalary()) && Objects.equals(getContractDate(), employee.getContractDate());
+        if (!(o instanceof Collectionist collectionist)) return false;
+        return Objects.equals(getCodeCollectionist(), collectionist.getCodeCollectionist()) && Objects.equals(getLoan(), collectionist.getLoan()) && Objects.equals(getContractDate(), collectionist.getContractDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCodeEmployee(), getSalary(), getContractDate());
+        return Objects.hash(getCodeCollectionist(), getLoan(), getContractDate());
     }
 
     @Override
     public String toString() {
         return "Collectionist{" +
-                "codeUser=" + codeEmployee +
-                ", salary='" + salary + '\'' +
+                "codeUser=" + codeCollectionist +
+                ", loan='" + loan + '\'' +
                 ", contractDate=" + contractDate +
                 '}';
     }

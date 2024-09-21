@@ -12,6 +12,6 @@ public interface UserEmployeeMapper {
 
     Users toUsers(UserEmployeeDTO dto);
 
-    // Mapear UserEmployeeDTO a Employee automáticamente
+    // Mapear UserCollectionistMapper a Collectionist automáticamente
     Employee toEmployee(UserEmployeeDTO dto);
 }

@@ -63,7 +63,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Collectionist{" +
                 "codeUser=" + codeUser +
                 ", name='" + name + '\'' +
                 ", lastnameOne='" + lastnameOne + '\'' +

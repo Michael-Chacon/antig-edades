@@ -1,4 +1,4 @@
-package com.app.app.employee.persistence.DTO;
+package com.app.app.collectionist.persistence.DTO;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserEmployeeDTO {
+public class UserCollectionistDTO {
     Long codeUser;
     Long codeBranch;
     Long codeGender;
@@ -20,7 +20,8 @@ public class UserEmployeeDTO {
     String lastnameTwo;
     String email;
     String password;
-    BigDecimal salary;
+//    data of collectionist
+    BigDecimal loan;
     LocalDate contractDate;
 
     @Override
@@ -34,7 +35,7 @@ public class UserEmployeeDTO {
                 ", lastnameTwo='" + lastnameTwo + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", salary=" + salary +
+                ", salary=" + loan +
                 ", contractDate=" + contractDate +
                 '}';
     }
