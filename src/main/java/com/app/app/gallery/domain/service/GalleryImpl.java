@@ -42,7 +42,7 @@ public class GalleryImpl implements IGallery {
         }).orElseThrow(() -> new ResourceNotFoundException(Gallery.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

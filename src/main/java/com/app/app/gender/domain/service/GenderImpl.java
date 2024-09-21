@@ -41,7 +41,7 @@ public class GenderImpl implements IGender {
         }).orElseThrow(() -> new ResourceNotFoundException(Gender.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

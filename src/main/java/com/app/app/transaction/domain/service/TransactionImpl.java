@@ -65,7 +65,7 @@ public class TransactionImpl implements ITransaction {
         }).orElseThrow(() -> new ResourceNotFoundException(Transaction.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

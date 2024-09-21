@@ -80,7 +80,7 @@ public class TransactionDetailImpl implements ITransactionDetail {
         }).orElseThrow(() -> new ResourceNotFoundException(TransactionDetail.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

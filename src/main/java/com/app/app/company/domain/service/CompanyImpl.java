@@ -41,7 +41,7 @@ public class CompanyImpl implements ICompany {
         }).orElseThrow(() -> new ResourceNotFoundException(Company.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

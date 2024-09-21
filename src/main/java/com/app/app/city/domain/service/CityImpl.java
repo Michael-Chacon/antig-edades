@@ -42,7 +42,7 @@ public class CityImpl implements ICity {
         }).orElseThrow(() -> new ResourceNotFoundException(City.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

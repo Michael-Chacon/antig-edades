@@ -41,7 +41,7 @@ public class ConservationStatusImpl implements IConservationStatus {
         }).orElseThrow(() -> new ResourceNotFoundException(ConservationStatus.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

@@ -41,7 +41,7 @@ public class PaymentMethodImpl implements IPaymentMethod {
         }).orElseThrow(() -> new ResourceNotFoundException(PaymentMethod.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

@@ -41,7 +41,7 @@ public class TypeAddressImpl implements ITypeAddress {
         }).orElseThrow(() -> new ResourceNotFoundException(TypeAddress.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

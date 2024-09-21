@@ -42,7 +42,7 @@ public class CategoryImpl implements ICategory{
         }).orElseThrow(() -> new ResourceNotFoundException(Category.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

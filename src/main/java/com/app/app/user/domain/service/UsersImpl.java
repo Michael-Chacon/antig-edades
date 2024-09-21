@@ -45,7 +45,7 @@ public class UsersImpl implements IUsers {
         }).orElseThrow(() -> new ResourceNotFoundException(Users.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

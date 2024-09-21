@@ -83,7 +83,7 @@ public class CollectionistImpl implements ICollectionist {
         }).orElseThrow(() -> new ResourceNotFoundException(Collectionist.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

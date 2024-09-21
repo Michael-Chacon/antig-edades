@@ -42,7 +42,7 @@ public class BranchImpl implements IBranch {
         }).orElseThrow(() -> new ResourceNotFoundException(Branch.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

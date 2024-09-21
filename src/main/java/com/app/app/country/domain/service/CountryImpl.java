@@ -41,7 +41,7 @@ public class CountryImpl implements ICountry {
         }).orElseThrow(() -> new ResourceNotFoundException(Country.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));

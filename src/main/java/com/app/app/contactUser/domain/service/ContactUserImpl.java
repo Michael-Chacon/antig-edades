@@ -61,7 +61,7 @@ public class ContactUserImpl implements IContactUser {
         }).orElseThrow(() -> new ResourceNotFoundException(ContactUser.class.getName(), id));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));
