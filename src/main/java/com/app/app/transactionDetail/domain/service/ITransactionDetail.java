@@ -1,5 +1,6 @@
 package com.app.app.transactionDetail.domain.service;
 
+import com.app.app.transactionDetail.DTO.SalesHistoryDTO;
 import com.app.app.transactionDetail.persistence.DTO.TransactionDetailDTO;
 import com.app.app.transactionDetail.persistence.entity.TransactionDetail;
 
@@ -11,4 +12,5 @@ public interface ITransactionDetail {
     TransactionDetail save(TransactionDetailDTO dto);
     TransactionDetail update(Long id, TransactionDetailDTO dto);
     void delete(Long id);
+    List<SalesHistoryDTO> getHistoryToSales();
 }

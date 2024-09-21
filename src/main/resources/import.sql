@@ -17,6 +17,8 @@ INSERT INTO type_contact (name) VALUES ('Personal'), ('Trabajo');
 INSERT INTO payment_method (name) VALUES ('TARJETA_DE_CREDITO'), ('TARJETA_DE_DEBITO'), ('TRANSFERENCIA_BANCARIA'), ('PAYPAL'), ('EFECTIVO'), ('BITCOIN'), ('APPLE_PAY'), ('GOOGLE_PAY'), ('CHEQUE');
 INSERT INTO transaction_type (name) VALUES ('compra'), ('pago'), ('reembolso');
 INSERT INTO transactions (date_transaction, code_user, code_transaction_type) VALUES ('2024-09-20', 1, 1), ('2024-09-21', 2, 2), ('2024-09-22', 3, 3);
+INSERT INTO transaction_detail (transaction_price, code_user, code_payment_method, code_antiquity, code_transaction) VALUES (1500.00, 7, 5, 4, 1), (2500.75, 7, 6, 5, 3), (3200.50, 7, 5, 6, 3), (1800.00, 8, 7, 7, 2), (4200.99, 8, 8, 8, 2);
+
 
 
 

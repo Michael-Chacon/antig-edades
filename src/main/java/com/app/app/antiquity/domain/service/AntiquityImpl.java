@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class AntiquityImpl implements IAntiquity {
@@ -59,5 +61,10 @@ public class AntiquityImpl implements IAntiquity {
     @Override
     public List<AvailableDTO> availableForSold() {
         return repository.findAntiquityByAvailableStatus();
+    }
+
+    @Override
+    public Set<AvailableDTO> antiquityByRangeOfPrice() {
+        return repository.findAntiquitiesForRangePrice(new BigDecimal("1000"), new BigDecimal("3000"));
     }
 }

@@ -5,6 +5,7 @@ import com.app.app.antiquity.persistence.Antiquity;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public interface IAntiquity {
     List<Antiquity> findAll();
@@ -13,4 +14,5 @@ public interface IAntiquity {
     Antiquity update(Long id, Antiquity antiquity);
     void delete(Long id);
     List<AvailableDTO> availableForSold();
+    Set<AvailableDTO> antiquityByRangeOfPrice();
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.app.app.consts.GeneralConst.ID_IN_PATH;
 
@@ -57,6 +58,11 @@ public class AntiquityController {
     @GetMapping("/forSold")
     public ResponseEntity<List<AvailableDTO>> getAvailableForSold(){
         return ResponseEntity.ok(service.availableForSold());
+    }
+
+    @GetMapping("/range")
+    public ResponseEntity<Set<AvailableDTO>> getAntiquityForRangeOfPrice(){
+        return ResponseEntity.ok(service.antiquityByRangeOfPrice());
     }
 
 }

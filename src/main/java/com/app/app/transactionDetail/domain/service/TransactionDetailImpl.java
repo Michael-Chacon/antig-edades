@@ -7,6 +7,7 @@ import com.app.app.paymentMethod.domain.repository.PaymentMethodRepository;
 import com.app.app.paymentMethod.persistence.PaymentMethod;
 import com.app.app.transaction.domain.repository.TransactionRepository;
 import com.app.app.transaction.persistence.entity.Transaction;
+import com.app.app.transactionDetail.DTO.SalesHistoryDTO;
 import com.app.app.transactionDetail.domain.repository.TransactionDetailRepository;
 import com.app.app.transactionDetail.persistence.DTO.TransactionDetailDTO;
 import com.app.app.transactionDetail.persistence.entity.TransactionDetail;
@@ -46,6 +47,7 @@ public class TransactionDetailImpl implements ITransactionDetail {
     @Transactional
     @Override
     public TransactionDetail save(TransactionDetailDTO dto) {
+        System.out.println(dto);
         PaymentMethod paymentMethod = paymentRepository.findById(dto.getPaymentMethod()).orElseThrow(() -> new ResourceNotFoundException(PaymentMethod.class.getName(), dto.getPaymentMethod()));
         Antiquity antiquity = antiquityRepository.findById(dto.getAntiquity()).orElseThrow(() -> new ResourceNotFoundException(Antiquity.class.getName(), dto.getAntiquity()));
 //        el propietario de la aniguedad debe ser el vendedor
@@ -84,5 +86,10 @@ public class TransactionDetailImpl implements ITransactionDetail {
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));
+    }
+
+    @Override
+    public List<SalesHistoryDTO> getHistoryToSales() {
+        return repository.findSalesHistory();
     }
 }

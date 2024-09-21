@@ -1,5 +1,6 @@
 package com.app.app.transactionDetail.controller;
 
+import com.app.app.transactionDetail.DTO.SalesHistoryDTO;
 import com.app.app.transactionDetail.domain.service.ITransactionDetail;
 import com.app.app.transactionDetail.persistence.DTO.TransactionDetailDTO;
 import com.app.app.transactionDetail.persistence.entity.TransactionDetail;
@@ -51,6 +52,11 @@ public class TransactionDetailController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/nada")
+    public ResponseEntity<List<SalesHistoryDTO>> SalesHistory(){
+        return ResponseEntity.ok(service.getHistoryToSales());
     }
 
 }
