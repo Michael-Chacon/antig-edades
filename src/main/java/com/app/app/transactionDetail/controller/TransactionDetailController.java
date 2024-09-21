@@ -54,7 +54,7 @@ public class TransactionDetailController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/nada")
+    @GetMapping("/salesHistory")
     public ResponseEntity<List<SalesHistoryDTO>> SalesHistory(){
         return ResponseEntity.ok(service.getHistoryToSales());
     }
