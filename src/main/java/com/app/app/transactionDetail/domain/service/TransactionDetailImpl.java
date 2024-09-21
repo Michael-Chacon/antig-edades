@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -91,5 +93,10 @@ public class TransactionDetailImpl implements ITransactionDetail {
     @Override
     public List<SalesHistoryDTO> getHistoryToSales() {
         return repository.findSalesHistory();
+    }
+
+    @Override
+    public BigDecimal getTotal() {
+        return repository.calculateTotal(LocalDate.parse("2024-09-02"), LocalDate.of(2024, 9, 20));
     }
 }
