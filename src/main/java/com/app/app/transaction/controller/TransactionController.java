@@ -1,5 +1,6 @@
 package com.app.app.transaction.controller;
 
+import com.app.app.transaction.DTO.BiggestBuyersDTO;
 import com.app.app.transaction.domain.service.ITransaction;
 import com.app.app.transaction.persistence.DTO.TransactionDTO;
 import com.app.app.transaction.persistence.entity.Transaction;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.app.app.consts.GeneralConst.ID_IN_PATH;
 
@@ -51,6 +53,11 @@ public class TransactionController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/biggestBuyers")
+    public ResponseEntity<List<BiggestBuyersDTO>> getBiggestBuyers(){
+        return ResponseEntity.ok(service.biggestBuyers());
     }
 
 }

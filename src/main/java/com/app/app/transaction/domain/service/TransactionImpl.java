@@ -1,6 +1,7 @@
 package com.app.app.transaction.domain.service;
 
 import com.app.app.exceptions.ResourceNotFoundException;
+import com.app.app.transaction.DTO.BiggestBuyersDTO;
 import com.app.app.transaction.domain.repository.TransactionRepository;
 import com.app.app.transaction.persistence.DTO.TransactionDTO;
 import com.app.app.transaction.persistence.entity.Transaction;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TransactionImpl implements ITransaction {
@@ -69,5 +71,10 @@ public class TransactionImpl implements ITransaction {
     @Override
     public void delete(Long id) {
         repository.delete(findById(id));
+    }
+
+    @Override
+    public List<BiggestBuyersDTO> biggestBuyers() {
+        return repository.findTotalPurchases();
     }
 }
