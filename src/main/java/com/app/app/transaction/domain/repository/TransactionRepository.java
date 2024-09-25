@@ -14,5 +14,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "INNER JOIN t.users u " +
             "GROUP BY u.codeUser " +
             "ORDER BY totalPurchases DESC")
-List<BiggestBuyersDTO> findTotalPurchases();
+    List<BiggestBuyersDTO> findTotalPurchases();
 }
