@@ -3,6 +3,7 @@ package com.app.app.user.persistence;
 import com.app.app.branch.persistence.Branch;
 import com.app.app.country.persistence.Country;
 import com.app.app.gender.persistence.Gender;
+import com.app.app.role.persistence.Role;
 import com.app.app.utils.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -49,6 +51,10 @@ public class Users {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codeGender")
     Gender gender;
+
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "code_user"),  inverseJoinColumns = @JoinColumn(name = "code_role"))
+    Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
