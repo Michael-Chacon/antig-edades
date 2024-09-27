@@ -1,5 +1,6 @@
 package com.app.app.branch.controller;
 
+import com.app.app.branch.DTO.BranchDTO;
 import com.app.app.branch.domain.service.IBranch;
 import com.app.app.branch.persistence.Branch;
 import com.app.app.utils.MakeValidation;
@@ -34,7 +35,7 @@ public class BranchController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createBranch(@Valid @RequestBody Branch branch, BindingResult result){
+    public ResponseEntity<?> createBranch(@Valid @RequestBody BranchDTO branch, BindingResult result){
         if (result.hasFieldErrors()){
             return makeValidation.validation(result);
         }
@@ -42,7 +43,7 @@ public class BranchController {
     }
 
     @PutMapping(ID_IN_PATH)
-    public ResponseEntity<Branch> updateBranch(@PathVariable Long id, @RequestBody Branch branch){
+    public ResponseEntity<Branch> updateBranch(@PathVariable Long id, @RequestBody BranchDTO branch){
         return ResponseEntity.ok(service.update(id, branch));
     }
 
