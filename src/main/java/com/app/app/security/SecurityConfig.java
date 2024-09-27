@@ -37,7 +37,7 @@ public class SecurityConfig {
 
         return http.csrf(config -> config.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/employee").permitAll(); //Dar acceso a este endpoint
+                    auth.requestMatchers("/collectionist").permitAll(); //Dar acceso a este endpoint
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> {

@@ -20,7 +20,6 @@ public class UserCollectionistDTO {
     String lastnameTwo;
     String email;
     String password;
-//    data of collectionist
     BigDecimal loan;
     LocalDate contractDate;
 

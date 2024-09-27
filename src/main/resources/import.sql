@@ -20,6 +20,8 @@ INSERT INTO transactions (date_transaction, code_user, code_transaction_type) VA
 INSERT INTO transaction_detail (transaction_price, code_user, code_payment_method, code_antiquity, code_transaction) VALUES (1500.00, 7, 5, 4, 1), (2500.75, 7, 6, 5, 3), (3200.50, 7, 5, 6, 3), (1800.00, 8, 7, 7, 2), (4200.99, 8, 8, 8, 2);
 insert into role values (1, 'ADMIN'), (2, 'USER'), (3, 'GUEST');
 insert into user_roles values (4, 1), (5, 2), (1, 3)
+INSERT INTO collectionist (code_branch, code_gender, name, lastname_one, lastname_two, email, password, loan, contract_date) VALUES (2, 1, 'Briandd', 'Porras', 'Vargas', 'b@example.com', 'password123', 10000.75, '2023-09-27'), (3, 2, 'María', 'González', 'López', 'maria@example.com', 'password456', 15000.50, '2023-08-15');
+
 
 
 
