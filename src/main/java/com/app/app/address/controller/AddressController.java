@@ -1,5 +1,6 @@
 package com.app.app.address.controller;
 
+import com.app.app.address.DTO.AddressDTO;
 import com.app.app.address.domain.service.IAddress;
 import com.app.app.address.persistence.Address;
 import com.app.app.utils.MakeValidation;
@@ -34,16 +35,16 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createAddress(@Valid @RequestBody Address address, BindingResult result){
+    public ResponseEntity<?> createAddress(@Valid @RequestBody AddressDTO addressDTO, BindingResult result){
         if (result.hasFieldErrors()){
             return makeValidation.validation(result);
         }
-        return ResponseEntity.ok(service.save(address));
+        return ResponseEntity.ok(service.saveOrUpdate(null, addressDTO));
     }
 
     @PutMapping(ID_IN_PATH)
-    public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody Address address){
-        return ResponseEntity.ok(service.update(id, address));
+    public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody AddressDTO addressDTO){
+        return ResponseEntity.ok(service.saveOrUpdate(id, addressDTO));
     }
 
     @DeleteMapping(ID_IN_PATH)
