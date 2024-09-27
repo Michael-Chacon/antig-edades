@@ -29,6 +29,7 @@ public class SecurityConfig {
 
     @Autowired
     JwtAuthorizationFilter jwtAuthorizationFilter;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JwtAuthenticationFilter authenticationFilter = new JwtAuthenticationFilter(jwtUtils);
@@ -36,7 +37,7 @@ public class SecurityConfig {
 
         return http.csrf(config -> config.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth").permitAll(); //Dar acceso a este endpoint
+                    auth.requestMatchers("/region").permitAll(); //Dar acceso a este endpoint
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> {

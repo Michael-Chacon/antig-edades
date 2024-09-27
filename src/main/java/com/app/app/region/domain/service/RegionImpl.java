@@ -1,6 +1,10 @@
 package com.app.app.region.domain.service;
 
+import com.app.app.country.domain.repository.CountryRepository;
+import com.app.app.country.domain.service.CountryImpl;
+import com.app.app.country.persistence.Country;
 import com.app.app.exceptions.ResourceNotFoundException;
+import com.app.app.region.DTO.RegionDTO;
 import com.app.app.region.domain.repository.RegionRepository;
 import com.app.app.region.persistence.Region;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +15,14 @@ import java.util.List;
 
 @Service
 public class RegionImpl implements IRegion {
-     @Autowired
+    @Autowired
     private RegionRepository repository;
 
+    @Autowired
+    private CountryImpl countryImpl;
+
     @Transactional(readOnly = true)
-     @Override
+    @Override
     public List<Region> findAll() {
         return repository.findAll();
     }
@@ -28,16 +35,22 @@ public class RegionImpl implements IRegion {
 
     @Transactional
     @Override
-    public Region save(Region region) {
+    public Region save(RegionDTO regionDTO) {
+        Country country = countryImpl.findById(regionDTO.getCountryId());
+        Region region = new Region();
+        region.setName(regionDTO.getName());
+        region.setCountry(country);
         return repository.save(region);
     }
 
     @Transactional
     @Override
-    public Region update(Long id, Region region) {
+    public Region update(Long id, RegionDTO regionDTO) {
         return repository.findById(id).map(existElement -> {
-            existElement.setName(region.getName());
-            existElement.setCountry(region.getCountry());
+            // validar que el pais existe
+            Country country = countryImpl.findById(regionDTO.getCountryId());
+            existElement.setName(regionDTO.getName());
+            existElement.setCountry(country);
             return repository.save(existElement);
         }).orElseThrow(() -> new ResourceNotFoundException(Region.class.getName(), id));
     }

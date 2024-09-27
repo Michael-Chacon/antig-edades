@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +25,13 @@ public class CountryController {
     private MakeValidation makeValidation;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Country>> getAllCountry() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(ID_IN_PATH)
-    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Country> getCountryByid(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }

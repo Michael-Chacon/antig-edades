@@ -1,5 +1,6 @@
 package com.app.app.region.controller;
 
+import com.app.app.region.DTO.RegionDTO;
 import com.app.app.region.domain.service.IRegion;
 import com.app.app.region.persistence.Region;
 import com.app.app.utils.MakeValidation;
@@ -34,7 +35,7 @@ public class RegionController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createRegion(@Valid @RequestBody Region region, BindingResult result){
+    public ResponseEntity<?> createRegion(@Valid @RequestBody RegionDTO region, BindingResult result){
         if (result.hasFieldErrors()){
             return makeValidation.validation(result);
         }
@@ -42,7 +43,7 @@ public class RegionController {
     }
 
     @PutMapping(ID_IN_PATH)
-    public ResponseEntity<Region> updateRegion(@PathVariable Long id, @RequestBody Region region){
+    public ResponseEntity<Region> updateRegion(@PathVariable Long id, @RequestBody RegionDTO region){
         return ResponseEntity.ok(service.update(id, region));
     }
 
