@@ -1,5 +1,6 @@
 package com.app.app.antiquity.controller;
 
+import com.app.app.antiquity.DTO.AntiquityDTO;
 import com.app.app.antiquity.DTO.AvailableDTO;
 import com.app.app.antiquity.domain.service.IAntiquity;
 import com.app.app.antiquity.persistence.Antiquity;
@@ -37,16 +38,16 @@ public class AntiquityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createAntiquity(@Valid @RequestBody Antiquity antiquity, BindingResult result){
+    public ResponseEntity<?> createAntiquity(@Valid @RequestBody AntiquityDTO antiquity, BindingResult result){
         if (result.hasFieldErrors()){
             return makeValidation.validation(result);
         }
-        return ResponseEntity.ok(service.save(antiquity));
+        return ResponseEntity.ok(service.saveOrUpdate(null, antiquity));
     }
 
     @PutMapping(ID_IN_PATH)
-    public ResponseEntity<Antiquity> updateAntiquity(@PathVariable Long id, @RequestBody Antiquity antiquity){
-        return ResponseEntity.ok(service.update(id, antiquity));
+    public ResponseEntity<Antiquity> updateAntiquity(@PathVariable Long id, @RequestBody AntiquityDTO antiquity){
+        return ResponseEntity.ok(service.saveOrUpdate(id, antiquity));
     }
 
     @DeleteMapping(ID_IN_PATH)

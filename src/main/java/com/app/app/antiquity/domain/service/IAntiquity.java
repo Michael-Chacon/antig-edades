@@ -1,5 +1,6 @@
 package com.app.app.antiquity.domain.service;
 
+import com.app.app.antiquity.DTO.AntiquityDTO;
 import com.app.app.antiquity.DTO.AvailableDTO;
 import com.app.app.antiquity.persistence.Antiquity;
 
@@ -10,8 +11,7 @@ import java.util.Set;
 public interface IAntiquity {
     List<Antiquity> findAll();
     Antiquity findById(Long id);
-    Antiquity save(Antiquity antiquity);
-    Antiquity update(Long id, Antiquity antiquity);
+    Antiquity saveOrUpdate(Long id, AntiquityDTO antiquity);
     void delete(Long id);
     List<AvailableDTO> availableForSold();
     Set<AvailableDTO> antiquityByRangeOfPrice();
