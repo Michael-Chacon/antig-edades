@@ -1,6 +1,9 @@
 package com.app.app.gallery.domain.service;
 
+import com.app.app.antiquity.domain.service.IAntiquity;
+import com.app.app.antiquity.persistence.Antiquity;
 import com.app.app.exceptions.ResourceNotFoundException;
+import com.app.app.gallery.DTO.GalleryDTO;
 import com.app.app.gallery.domain.repository.GalleryRepository;
 import com.app.app.gallery.persistence.Gallery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class GalleryImpl implements IGallery {
-     @Autowired
+    @Autowired
     private GalleryRepository repository;
 
+    @Autowired
+    private IAntiquity antiquityService;
+
     @Transactional(readOnly = true)
-     @Override
+    @Override
     public List<Gallery> findAll() {
         return repository.findAll();
     }
@@ -26,25 +33,24 @@ public class GalleryImpl implements IGallery {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Gallery.class.getName(), id));
     }
 
-    @Transactional
     @Override
-    public Gallery save(Gallery gallery) {
+    public Gallery saveOrUpdate(Long id, GalleryDTO galleryDTO) {
+        Gallery gallery;
+
+        if (id != null) {
+            gallery = findById(id);
+        } else {
+            gallery = new Gallery();
+        }
+
+        Antiquity antiquity = antiquityService.findById(galleryDTO.getAntiquityId());
+        gallery.setAntiquity(antiquity);
+        gallery.setUrlPhoto(galleryDTO.getUrl());
         return repository.save(gallery);
     }
 
-    @Transactional
-    @Override
-    public Gallery update(Long id, Gallery gallery) {
-        return repository.findById(id).map(existElement -> {
-            existElement.setUrlPhoto(gallery.getUrlPhoto());
-            existElement.setAntiquity(gallery.getAntiquity());
-            return repository.save(existElement);
-        }).orElseThrow(() -> new ResourceNotFoundException(Gallery.class.getName(), id));
-    }
-
-    @Transactional
     @Override
     public void delete(Long id) {
-        repository.delete(findById(id));
+        repository.deleteById(id);
     }
 }

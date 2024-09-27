@@ -1,5 +1,6 @@
 package com.app.app.gallery.controller;
 
+import com.app.app.gallery.DTO.GalleryDTO;
 import com.app.app.gallery.domain.service.IGallery;
 import com.app.app.gallery.persistence.Gallery;
 import com.app.app.utils.MakeValidation;
@@ -34,16 +35,16 @@ public class GalleryController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createGallery(@Valid @RequestBody Gallery gallery, BindingResult result){
+    public ResponseEntity<?> createGallery(@Valid @RequestBody GalleryDTO gallery, BindingResult result){
         if (result.hasFieldErrors()){
             return makeValidation.validation(result);
         }
-        return ResponseEntity.ok(service.save(gallery));
+        return ResponseEntity.ok(service.saveOrUpdate(null, gallery));
     }
 
     @PutMapping(ID_IN_PATH)
-    public ResponseEntity<Gallery> updateGallery(@PathVariable Long id, @RequestBody Gallery gallery){
-        return ResponseEntity.ok(service.update(id, gallery));
+    public ResponseEntity<Gallery> updateGallery(@PathVariable Long id, @RequestBody GalleryDTO gallery){
+        return ResponseEntity.ok(service.saveOrUpdate(id, gallery));
     }
 
     @DeleteMapping(ID_IN_PATH)
