@@ -1,5 +1,6 @@
 package com.app.app.city.controller;
 
+import com.app.app.city.DTO.CityDTO;
 import com.app.app.city.domain.service.ICity;
 import com.app.app.city.persistence.City;
 import com.app.app.utils.MakeValidation;
@@ -34,7 +35,7 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createCity(@Valid @RequestBody City city, BindingResult result){
+    public ResponseEntity<?> createCity(@Valid @RequestBody CityDTO city, BindingResult result){
         if (result.hasFieldErrors()){
             return makeValidation.validation(result);
         }
@@ -42,7 +43,7 @@ public class CityController {
     }
 
     @PutMapping(ID_IN_PATH)
-    public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City city){
+    public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody CityDTO city){
         return ResponseEntity.ok(service.update(id, city));
     }
 
