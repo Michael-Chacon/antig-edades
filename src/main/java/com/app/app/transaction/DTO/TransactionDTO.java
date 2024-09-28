@@ -1,4 +1,4 @@
-package com.app.app.transaction.persistence.DTO;
+package com.app.app.transaction.DTO;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
