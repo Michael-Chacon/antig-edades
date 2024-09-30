@@ -2,6 +2,7 @@ package com.app.app.region.persistence;
 
 import com.app.app.country.persistence.Country;
 import com.app.app.utils.IsRequired;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -25,7 +26,8 @@ public class Region {
     @IsRequired
     String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "codeCountry")
     Country country;
 
